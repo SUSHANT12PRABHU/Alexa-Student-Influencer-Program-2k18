@@ -1,0 +1,69 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "manipal info",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": [
+                        "cancel"
+                    ]
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": [
+                        "help"
+                    ]
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": [
+                        "stop"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": [
+                        "home"
+                    ]
+                },
+                {
+                    "name": "Hello",
+                    "slots": [],
+                    "samples": [
+                        "where is Manipal Institute of Technology",
+                        "Tell me something about Manipal Institute of Technology",
+                        "Manipal Institute of Technology",
+                        "is mit manipal good",
+                        "tell me about mit manipal",
+                    ]
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": [
+                        "yes"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": [
+                        "no"
+                    ]
+                },
+                {
+                    "name": "Academic_Rules",
+                    "slots": [],
+                    "samples": [
+                        "Tell me about the academic rules",
+                        "What are the academic rules"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
