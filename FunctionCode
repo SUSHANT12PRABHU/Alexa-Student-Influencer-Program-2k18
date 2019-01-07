@@ -1,0 +1,64 @@
+'use strict';
+const Alexa = require('alexa-sdk');
+const APP_ID = 'amzn1.ask.skill.5f978a95-67a8-437f-adde-754517939883';
+ 
+const SKILL_NAME = 'Manipal Fresher';
+const GET_FACT_MESSAGE = "Welcome to MIT Manipal Guide for Freshers ! About ";
+const GET_FACT_MESSAGE1 = " . For more information please visit www.manipal.e d u";
+const HELP_MESSAGE = 'You can say tell me more about MIT Manipal, or, you can say exit... What can I help you with?';
+const HELP_REPROMPT = 'What can I help you with?';
+const STOP_MESSAGE = 'Goodbye!';
+const i=0; 
+const data = [
+'Marena : It is a centrally-cooled sports complex at Manipal Academy of Higher Education. It is one of the largest and best-equipped sports centres in the country, aimed at ensuring that the six long months of monsoon in the region do not disrupt the fitness regimen of students and staff. Some of the facilities provided include a jogging track with a rubberised surface, a gymnasium with cardiovascular equipment, weights, strength training and flexibility machines, four squash courts with a viewing gallery, a basketball court built to NBA specifications, five badminton courts, a playing area for futsal, a cricket bowling machine, a kinesis circuit system and five enclosures for simulation games, a sauna and steam bath. And they are all under one roof.',
+'Change of Branch after 1 st year : It is allowed on request against vacancies before commencement of the third semester based on academic performance of first year B.Tech. Applications for change of branch shall be submitted to the Associate Director (Academics), at the end of the second semester.Merit list will be prepared based on the CGPA after the declaration of second semester results.Only students who have passed in all the subjects of I & II semesters are eligible for change of branch.Students who have secured seats under any scholarship scheme and have opted for branch change will not be eligible for the scholarship from the second year. Mutual change of branch is not permitted.',
+'Culture : Life at MIT manipal is really awesome.Manipal as a city is full of greenery and filled with beauty of nature.There are lots of beautiful beaches nearby.Its the best place to enjoy as well as to study for your 4 yrs of your life.',
+'Hostel : It is the best you’ll find among any engineering colleges in India.It entails of good , clean and comfortable AC as well as Non AC rooms',
+'Mess : The food served by the Food Court is nourishing and very hygienic',
+'Crowd : One of the most diversified crowd you can find, people from all over India and abroad come here to study. And everyone has a good background and is of decent nature. Peers and seniors alike help out a lot.',
+'Clubs : Manipal hosts a variety of technical and non technical clubs, which participate in events held all over the nation and even international events. Plus clubs are places where people get to interact with each other, form new friends and learn to work as a team.',
+'Facilities: All the facilities in Manipal are top notch, from academic buildings, labs to mess, room cleaning, etc.',
+'Faculty : Though it can’t be compared to that of the IITs, N.I.Ts, BITs or other top government colleges, it surely has above par faculties compared to other private colleges. ',
+'Other things at MIT,Manipal : It is a hub of activities, where people from different cultures and social background meet and become friends. The rooms and facilities give you a close to home experience and the exposure the college provides is very good.',
+'Academic Term: The institute offers Bachelor of Technology (B.Tech.) ,also Master of Technology (M.Tech.) under programmes of MAHE. Each semester has a specified course structure. Duration of the B.Tech. programme is 8 semesters. The first year B.Tech. course structure is common to all branches. Duration of M.Tech and MCA programme is 4 semesters of Engineering. The medium of instruction for all courses offered is English.',
+'Grading and Evaluation: Credit Based System: Each course, theory as well as practical, is expressed in terms of a certain number of credits. The credits are determined by the number of contact hours per week. For theory courses, 1 Hour Lecture / Tutorial per week is assigned 1 Credit, where as for practical courses 3 contact hours per week is assigned 1 Credit. The overall performance of the student for the entire programme is indicated by the Cumulative Grade Point Average (CGPA) which is the weighted average of the grade points obtained across all semesters till date where n = Number of courses graded per semester C = Course credits G = Grade points',
+'MIT Manipal in Karnataka : Manipal Academy of Higher Education is synonymous with excellence in higher education. Over 28,000 students from 57 different nations live, learn and play in the sprawling University town, nestled on a plateau in Karnataka’s Udupi district. It also has nearly 2500 faculty and almost 10000 other support and service staff, who cater to the various professional institutions in health sciences, engineering, management, communication and humanities which dot the Wi-Fi-enabled campus.'
+];
+
+const handlers = {
+    'LaunchRequest': function () {
+        this.emit('GetNewFactIntent');
+    },
+    'GetNewFactIntent': function () {
+        const Arr = data;
+        const Index = Math.floor(Math.random() * Arr.length);
+        const Message = Arr[Index];
+        const speechOutput = GET_FACT_MESSAGE + Message + GET_FACT_MESSAGE1;
+
+        this.response.cardRenderer(SKILL_NAME, Message);
+        this.response.speak(speechOutput);
+        this.emit(':responseReady');
+    },
+    'AMAZON.HelpIntent': function () {
+        const speechOutput = HELP_MESSAGE;
+        const reprompt = HELP_REPROMPT;
+
+        this.response.speak(speechOutput).listen(reprompt);
+        this.emit(':responseReady');
+    },
+    'AMAZON.CancelIntent': function () {
+        this.response.speak(STOP_MESSAGE);
+        this.emit(':responseReady');
+    },
+    'AMAZON.StopIntent': function () {
+        this.response.speak(STOP_MESSAGE);
+        this.emit(':responseReady');
+    },
+};
+
+exports.handler = function (event, context, callback) {
+    const alexa = Alexa.handler(event, context, callback);
+    alexa.APP_ID = APP_ID;
+    alexa.registerHandlers(handlers);
+    alexa.execute();
+};
